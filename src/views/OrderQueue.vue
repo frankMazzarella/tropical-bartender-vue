@@ -8,26 +8,24 @@
 import SocketIOClient from '../services/SocketIOClient';
 
 export default {
-  name: 'App',
+  name: 'OrderQueue',
+  data: () => ({
+    socket: null,
+  }),
   created: function () {
-    SocketIOClient.initSocket();
+    this.socket = SocketIOClient.connectToOrderQueue();
     this.registerSocketLifecycleEvents();
   },
   methods: {
-    // TODO: this should probably be in a service or something to manage state
     registerSocketLifecycleEvents() {
-      console.log('registering');
-      SocketIOClient.socket.on('connect', () => {
+      this.socket.on('connect', () => {
         console.log('socket connect');
       });
-      SocketIOClient.socket.on('disconnect', () => {
+      this.socket.on('disconnect', () => {
         console.log('socket disconn');
       });
-      SocketIOClient.socket.on('queue update', (queue) => {
-        console.log({ queue });
-      });
-      SocketIOClient.socket.on('drink list', (drinkList) => {
-        console.log({ drinkList });
+      this.socket.on('queue update', (queue) => {
+        console.log(queue);
       });
     }
   }
