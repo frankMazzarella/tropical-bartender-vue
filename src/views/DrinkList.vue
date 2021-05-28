@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div>
     <h1>Tropical Drink List</h1>
     <div class="drink-item" v-for="(drink, index) in drinkList" :key="index">
       <span class="drink-name">{{ drink.name }}</span>
@@ -9,6 +9,10 @@
         </span>
       </div>
     </div>
+    <div class="modal active">
+      modal
+    </div>
+    <div class="mask active"></div>
   </div>
 </template>
 
@@ -77,5 +81,32 @@ h1 {
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 95%;
+}
+
+.active {
+  visibility: visible !important;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 300px;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+  background-color: #22262b;
+  z-index: 100;
+}
+
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  visibility: hidden;
+  z-index: 50;
 }
 </style>
