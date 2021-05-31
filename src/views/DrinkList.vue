@@ -4,21 +4,20 @@
     <div v-for="(drink, index) in drinkList" :key="index">
       <available-drink-row :drink="drink" />
     </div>
-    <div class="modal active">
-      modal
-    </div>
-    <div class="mask active"></div>
+    <order-drink-modal drink-name="501 Blue" />
   </div>
 </template>
 
 <script>
 import SocketIOClient from '../services/SocketIOClient';
 import AvailableDrinkRow from '../components/AvailableDrinkRow';
+import OrderDrinkModal from '../components/OrderDrinkModal';
 
 export default {
   name: 'DrinkList',
   components: {
-    AvailableDrinkRow
+    AvailableDrinkRow,
+    OrderDrinkModal
   },
   data: () => ({
     socket: null,
@@ -48,32 +47,5 @@ export default {
 <style scoped>
 h1 {
   color: #e0723b;
-}
-
-.active {
-  visibility: visible !important;
-}
-
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 400px;
-  height: 300px;
-  transform: translate(-50%, -50%);
-  visibility: hidden;
-  background-color: #22262b;
-  z-index: 100;
-}
-
-.mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  visibility: hidden;
-  z-index: 50;
 }
 </style>
