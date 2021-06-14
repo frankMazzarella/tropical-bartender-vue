@@ -1,11 +1,11 @@
 <template>
   <div v-if="active">
     <div class="modal">
-      <div class="title">Order a <strong>{{ drinkName }}</strong></div>
+      <div class="title">Order a <strong>{{ drink.name }}</strong></div>
       <label for="name">Your name</label>
-      <input type="text" id="name" />
+      <input type="text" ref="name" id="name" v-model="recipient" />
       <button class="cancel" @click="hide">Nevermind</button>
-      <button class="submit">Order</button>
+      <button class="submit" @click="submit">Order</button>
     </div>
     <div class="mask"></div>
   </div>
@@ -14,13 +14,32 @@
 <script>
 export default {
   name: 'OrderDrinkModal',
-  props: ['drinkName'],
   data: () => ({
-    active: true
+    active: false,
+    drink: {},
+    recipient: ''
   }),
+  created: function () {
+    this.$parent.$on('drink-clicked', this.show);
+    this.$parent.$on('order-complete', this.hide);
+  },
   methods: {
     hide() {
       this.active = false;
+      this.drink = {};
+      this.recipient = '';
+    },
+    show(drink) {
+      this.drink = drink;
+      this.active = true;
+    },
+    submit() {
+      if (!this.recipient) {
+        this.$refs.name.focus();
+        return;
+      }
+      this.drink.recipient = this.recipient;
+      this.$parent.$emit('order-drink', this.drink);
     }
   }
 }
@@ -55,7 +74,7 @@ button {
  padding: 5px;
  margin: 10px 5px;
  border: 0;
- border-radius: 2px;
+ border-radius: 4px;
  cursor: pointer;
  font-size: 1em;
  font-weight: bold;
@@ -78,6 +97,7 @@ button {
   transform: translate(-50%, -50%);
   background-color: #22262b;
   z-index: 100;
+  border-radius: 4px;
 }
 
 .mask {

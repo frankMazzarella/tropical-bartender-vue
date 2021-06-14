@@ -4,7 +4,7 @@
     <div v-for="(drink, index) in drinkList" :key="index">
       <available-drink-row :drink="drink" />
     </div>
-    <order-drink-modal drink-name="501 Blue" />
+    <order-drink-modal />
   </div>
 </template>
 
@@ -26,6 +26,7 @@ export default {
   created: function () {
     this.socket = SocketIOClient.connectToDrinkList();
     this.registerSocketLifecycleEvents();
+    this.$on('order-drink', this.emitDrinkOrder);
   },
   methods: {
     registerSocketLifecycleEvents() {
@@ -34,10 +35,18 @@ export default {
       });
       this.socket.on('disconnect', () => {
         console.log('socket disconn');
+        this.drinkList = [];
       });
       this.socket.on('drink list', (drinkList) => {
         console.log({ drinkList });
         this.drinkList = drinkList;
+      });
+    },
+    emitDrinkOrder(drink) {
+      this.socket.emit('add drink order', drink, () => {
+        console.log(drink);
+        console.log(`${drink.recipient} has ordered a ${drink.name}`);
+        this.$emit('order-complete');
       });
     }
   }

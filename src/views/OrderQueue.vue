@@ -25,7 +25,7 @@ export default {
         console.log('socket disconn');
       });
       this.socket.on('queue update', (queue) => {
-        console.log(queue);
+        console.log({ queue });
       });
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="drink-item">
+  <div class="drink-item" @click="orderDrink">
     <span class="drink-name">{{ drink.name }}</span>
     <div class="ingredients">
       <span v-for="(ingredient, index) in drink.ingredients" :key="index">
@@ -12,7 +12,12 @@
 <script>
 export default {
   name: 'AvailableDrinkRow',
-  props: ['drink']
+  props: ['drink'],
+  methods: {
+    orderDrink() {
+      this.$parent.$emit('drink-clicked', this.drink);
+    }
+  }
 }
 </script>
 
