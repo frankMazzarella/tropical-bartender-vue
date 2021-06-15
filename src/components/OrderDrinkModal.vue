@@ -7,7 +7,7 @@
       <button class="cancel" @click="hide">Nevermind</button>
       <button class="submit" @click="submit">Order</button>
     </div>
-    <div class="mask"></div>
+    <div class="mask" @click="hide"></div>
   </div>
 </template>
 

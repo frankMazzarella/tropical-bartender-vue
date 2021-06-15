@@ -23,6 +23,7 @@ export default {
 
 <style scoped>
 .drink-item {
+  cursor: pointer;
   background: #191b1f;
   border-radius: 2px;
   text-align: left;
