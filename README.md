@@ -1,4 +1,6 @@
 # tropical-bartender-vue
+# TODO: update readme
+# TODO: update favicon
 
 ## Project setup
 ```
