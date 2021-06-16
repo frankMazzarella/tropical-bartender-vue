@@ -37,7 +37,7 @@ export default {
     this.socket = SocketIOClient.connectToDrinkList();
     this.registerSocketLifecycleEvents();
     this.$on('order-drink', this.emitDrinkOrder);
-    this.startDateTime();
+    this.startDateTimeUpdateInterval();
   },
   methods: {
     registerSocketLifecycleEvents() {
@@ -60,7 +60,11 @@ export default {
         this.$emit('order-complete');
       });
     },
-    startDateTime() {
+    startDateTimeUpdateInterval() {
+      this.updateDateTime();
+      setInterval(() => this.updateDateTime(), 1000);
+    },
+    updateDateTime() {
       const days = [
         'Sunday',
         'Monday',
@@ -85,15 +89,13 @@ export default {
         'November',
         'December'
       ];
-      setInterval(() => {
-        const now = new Date();
-        const weekDay = days[now.getDay()];
-        const month = months[now.getMonth()];
-        const date = now.getDate();
-        const hours = now.getHours().toString().padStart(2, '0');
-        const minutes = now.getMinutes().toString().padStart(2, '0');
-        this.dateTime = `${weekDay}, ${month} ${date}, ${hours}:${minutes}`;
-      }, 1000);
+      const now = new Date();
+      const weekDay = days[now.getDay()];
+      const month = months[now.getMonth()];
+      const date = now.getDate();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      this.dateTime = `${weekDay}, ${month} ${date}, ${hours}:${minutes}`;
     }
   }
 }
