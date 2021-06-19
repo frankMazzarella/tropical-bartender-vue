@@ -13,6 +13,10 @@
         {{ ingredient.name }} - {{ ingredient.amount }}
       </div>
     </div>
+    <div class="row" v-if="isActive">
+      <div class="drink-style">serve over ice</div>
+      <button class="complete-button" @click="complete">Complete</button>
+    </div>
   </div>
 </template>
 
@@ -49,6 +53,9 @@ export default {
     },
     toggleActive() {
       this.isActive = !this.isActive;
+    },
+    complete() {
+      console.log(`complete order ${this.order.id}`);
     }
   }
 }
@@ -66,6 +73,7 @@ export default {
 .row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .top-left {
@@ -88,6 +96,24 @@ export default {
   padding: 5px;
   font-style: italic;
   color: #8a8a8a;
+}
+
+.drink-style {
+  padding: 10px;
+  color: #eee;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.complete-button {
+  width: 120px;
+  padding: 5px;
+  margin: 10px 5px;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
 }
 
 .active {
