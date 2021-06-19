@@ -12,6 +12,10 @@
         <drink-order-row :order="order" />
       </div>
     </div>
+    <div class="no-orders" v-if="orderQueue.length === 0">
+      <!-- TODO: drink image here -->
+      No pending drink orders
+    </div>
   </div>
 </template>
 
@@ -96,5 +100,16 @@ export default {
 
 .spacer {
   height: 45px;
+}
+
+.no-orders {
+  width: 250px;
+  height: 250px;
+  background-color: #191b1f;
+  border-radius: 25px;
+  margin: 75px auto;
+  vertical-align: middle;
+  font-size: 2em;
+  font-weight: bold;
 }
 </style>
