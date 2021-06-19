@@ -55,7 +55,7 @@ export default {
       this.isActive = !this.isActive;
     },
     complete() {
-      console.log(`complete order ${this.order.id}`);
+      this.$parent.$emit('complete-order', this.order.id);
     }
   }
 }

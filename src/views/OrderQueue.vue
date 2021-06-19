@@ -33,6 +33,7 @@ export default {
     this.socket = SocketIOClient.connectToOrderQueue();
     this.registerSocketLifecycleEvents();
     this.startTimeUpdateInterval();
+    this.$on('complete-order', this.emitDeleteDrinkOrder);
   },
   methods: {
     registerSocketLifecycleEvents() {
@@ -57,6 +58,11 @@ export default {
       const hours = now.getHours().toString().padStart(2, '0');
       const minutes = now.getMinutes().toString().padStart(2, '0');
       this.time = `${hours}:${minutes}`;
+    },
+    emitDeleteDrinkOrder(id) {
+      this.socket.emit('delete drink order', id, () => {
+        console.log(`drink ${id} was deleted`);
+      });
     }
   }
 }
