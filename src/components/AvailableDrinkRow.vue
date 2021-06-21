@@ -53,5 +53,6 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 95%;
+  color: #eee;
 }
 </style>

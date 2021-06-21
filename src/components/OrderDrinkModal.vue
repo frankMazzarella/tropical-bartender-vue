@@ -67,6 +67,7 @@ input {
   font-size: 1.2em;
   font-weight: bold;
   width: 240px;
+  background-color: #eee;
 }
 
 button {
@@ -96,6 +97,7 @@ button {
   padding: 25px 0;
   transform: translate(-50%, -50%);
   background-color: #22262b;
+  color: #eee;
   z-index: 100;
   border-radius: 4px;
 }
