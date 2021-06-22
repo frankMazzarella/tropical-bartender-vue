@@ -12,6 +12,8 @@
 </template>
 
 <script>
+// TODO: would be nice if enter key would trigger submit button
+
 export default {
   name: 'OrderDrinkModal',
   data: () => ({

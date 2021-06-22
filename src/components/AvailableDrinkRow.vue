@@ -1,17 +1,29 @@
 <template>
   <div class="drink-item" @click="orderDrink">
-    <span class="drink-name">{{ drink.name }}</span>
-    <div class="ingredients">
-      <span v-for="(ingredient, index) in drink.ingredients" :key="index">
-        {{ ingredient.name }}<span v-if="index + 1 !== drink.ingredients.length">,</span>
-      </span>
+    <div class="drink-icon">
+      <inline-svg v-if="drink.type === 'iced'" :src="require('../assets/drink-iced.svg')" fill="#eee" width="50px" />
+      <inline-svg v-if="drink.type === 'slushy'" :src="require('../assets/drink-slushy.svg')" fill="#eee" width="50px" />
+    </div>
+    <div class="drink-info-container">
+      <div class="drink-name">{{ drink.name }}</div>
+      <div class="drink-ingredients">
+        <span v-for="(ingredient, index) in drink.ingredients" :key="index">
+          {{ ingredient.name }}<span v-if="index + 1 !== drink.ingredients.length">,</span>
+        </span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import InlineSvg from 'vue-inline-svg';
+
+// TODO: would be nice if other modals would close when a new one opened
 export default {
   name: 'AvailableDrinkRow',
+  components: {
+    InlineSvg
+  },
   props: ['drink'],
   methods: {
     orderDrink() {
@@ -23,32 +35,40 @@ export default {
 
 <style scoped>
 .drink-item {
-  cursor: pointer;
+  width: 90%;
+  margin: 5px auto;
+  height: 65px;
+  display: flex;
   background: #191b1f;
   border-radius: 2px;
-  text-align: left;
-  display: inline-block;
-  position: relative;
-  padding: 10px;
-  height: 50px;
-  width: 90%;
-  margin: 5px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  cursor: pointer;
 }
 
-.drink-item:active {
-  box-shadow: 5px 5px 5px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+.drink-icon {
+  align-self: center;
+  width: 75px;
+}
+
+.drink-info-container {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex: 1 1 auto;
 }
 
 .drink-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 95%;
   color: #67a5fb;
   font-size: 1.3em;
+  text-align: left;
 }
 
-.ingredients {
-  position: absolute;
-  bottom: 10px;
+.drink-ingredients {
+  text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

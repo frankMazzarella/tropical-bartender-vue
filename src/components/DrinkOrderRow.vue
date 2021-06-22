@@ -8,13 +8,17 @@
       <div class="bottom-left">for {{ order.recipient.toLowerCase() }}</div>
       <div class="bottom-right">+ tap to expand</div>
     </div>
-    <div v-if="isActive">
-      <div v-for="(ingredient, index) in order.ingredients" :key="index">
-        {{ ingredient.name }} - {{ ingredient.amount }}
+    <div v-if="isActive" class="ingredient-container">
+      <div v-for="(ingredient, index) in order.ingredients" :key="index" class="ingredient">
+        <div class="ingredient-name">{{ ingredient.name }}</div>
+        <div class="ingredient-amount">- {{ ingredient.amount }}</div>
       </div>
     </div>
     <div class="row" v-if="isActive">
-      <div class="drink-style">serve over ice</div>
+      <div class="drink-style">
+        <div>serve as {{ order.type }}</div>
+        <div>deliver to {{ order.recipient.toLowerCase() }}</div>
+      </div>
       <button class="complete-button" @click="complete">Complete</button>
     </div>
   </div>
@@ -103,6 +107,7 @@ export default {
   color: #eee;
   font-size: 1em;
   font-weight: bold;
+  text-align: left;
 }
 
 .complete-button {
@@ -118,5 +123,30 @@ export default {
 
 .active {
   background-color: #131313;
+}
+
+.ingredient-container {
+  margin: 15px;
+}
+
+.ingredient {
+  display: flex;
+  width: 75%;
+  margin: 5px auto;
+  border-bottom: 1px dashed #808080;
+}
+
+.ingredient-name {
+  font-size: 1.1em;
+  color: #eee;
+  flex: 1 1 0px;
+  text-align: left;
+}
+
+.ingredient-amount {
+  font-size: 1.1em;
+  color: #eee;
+  flex: 1 1 0px;
+  text-align: right;
 }
 </style>

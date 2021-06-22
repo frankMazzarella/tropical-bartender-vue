@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="no-orders" v-if="orderQueue.length === 0">
-      <inline-svg :src="require('../assets/cocktail.svg')" fill="#eee" width="100px"/>
+      <inline-svg :src="require('../assets/cocktail.svg')" fill="#eee" width="100px" />
       <div>no orders</div>
     </div>
   </div>
