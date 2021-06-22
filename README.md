@@ -4,6 +4,7 @@
 # TODO: add admin page to allow drinks to be removed from available drinks page
 # TODO: add 'bartender is lazy' warning when drink orders are taking a while
 # TODO: add photo of bartender wearing coconut bra on drink order confirmation
+# TODO: attempt to get full screen/no sleep working on drink list
 
 ## Project setup
 ```
