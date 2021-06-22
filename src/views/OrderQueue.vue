@@ -1,12 +1,6 @@
 <template>
   <div>
-    <div class="header">
-      <div class="container">
-        <div class="header-left">Order Queue</div>
-        <div class="header-right">{{ time }}</div>
-      </div>
-    </div>
-    <div class="spacer" />
+    <bartender-header>Order Queue</bartender-header>
     <div class="container">
       <div v-for="(order, index) in orderQueue" :key="index">
         <drink-order-row :order="order" />
@@ -24,22 +18,22 @@ import InlineSvg from 'vue-inline-svg';
 
 import SocketIOClient from '../services/SocketIOClient';
 import DrinkOrderRow from '../components/DrinkOrderRow.vue';
+import BartenderHeader from '../components/BartenderHeader.vue';
 
 export default {
   name: 'OrderQueue',
   components: {
+    BartenderHeader,
     DrinkOrderRow,
     InlineSvg
   },
   data: () => ({
     socket: null,
     orderQueue: [],
-    time: ''
   }),
   created: function () {
     this.socket = SocketIOClient.connectToOrderQueue();
     this.registerSocketLifecycleEvents();
-    this.startTimeUpdateInterval();
     this.$on('complete-order', this.emitDeleteDrinkOrder);
   },
   methods: {
@@ -56,16 +50,6 @@ export default {
         this.orderQueue = orderQueue;
       });
     },
-    startTimeUpdateInterval() {
-      this.updateTime();
-      setInterval(() => this.updateTime(), 1000);
-    },
-    updateTime() {
-      const now = new Date();
-      const hours = now.getHours().toString().padStart(2, '0');
-      const minutes = now.getMinutes().toString().padStart(2, '0');
-      this.time = `${hours}:${minutes}`;
-    },
     emitDeleteDrinkOrder(id) {
       this.socket.emit('delete drink order', id, () => {
         console.log(`drink ${id} was deleted`);
@@ -79,30 +63,6 @@ export default {
 .container {
   max-width: 700px;
   margin: auto;
-}
-
-.header {
-  background-color: #191b1f;
-  width: 100%;
-  position: fixed;
-  border-bottom: 1px solid #e0723b;
-  color: #e0723b;
-  font-size: 1.5em;
-  z-index: 50;
-}
-
-.header-left {
-  float: left;
-  padding: 5px;
-}
-
-.header-right {
-  float: right;
-  padding: 5px;
-}
-
-.spacer {
-  height: 45px;
 }
 
 .no-orders {
