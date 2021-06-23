@@ -114,9 +114,11 @@ export default {
   width: 120px;
   padding: 5px;
   margin: 10px 5px;
+  /* TODO: needed? */
   border: 0;
   border-radius: 4px;
   cursor: pointer;
+  /* TODO: needed? */
   font-size: 1em;
   font-weight: bold;
 }

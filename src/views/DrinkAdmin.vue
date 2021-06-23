@@ -1,7 +1,6 @@
 <template>
   <div>
     <bartender-header>Drink Admin</bartender-header>
-    <!-- TODO: is the container div/class needed? please test. -->
     <div class="container">
       <div v-for="(drink, index) in drinkList" :key="index">
         <drink-admin-row :drink="drink" />
