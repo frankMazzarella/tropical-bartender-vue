@@ -8,7 +8,7 @@
     </div>
     <div class="spacer" />
     <div class="container" v-for="(drink, index) in drinkList" :key="index">
-      <available-drink-row :drink="drink" />
+      <available-drink-row v-if="drink.active" :drink="drink" />
     </div>
     <order-drink-modal />
   </div>

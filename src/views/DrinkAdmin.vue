@@ -14,6 +14,8 @@ import SocketIOClient from '../services/SocketIOClient';
 import BartenderHeader from '../components/BartenderHeader.vue';
 import DrinkAdminRow from '../components/DrinkAdminRow.vue';
 
+// TODO: add link to admin page
+
 export default {
   name: 'DrinkAdmin',
   components: {
@@ -27,6 +29,7 @@ export default {
   created: function () {
     this.socket =  SocketIOClient.connectToDrinkList();
     this.registerSocketLifecycleEvents();
+    this.$on('toggle-drink-active', this.emitToggleDrinkActive);
   },
   methods: {
     registerSocketLifecycleEvents() {
@@ -40,6 +43,11 @@ export default {
       this.socket.on('drink list', (drinkList) => {
         console.log({ drinkList });
         this.drinkList = drinkList;
+      });
+    },
+    emitToggleDrinkActive(id) {
+      this.socket.emit('toggle drink active', id, (updatedDrink) => {
+        console.log(`drink ${updatedDrink.id} was toggled to active = ${updatedDrink.active}`);
       });
     }
   }

@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="row" v-if="isActive">
-      <div class="drink-style">
+      <div class="drink-information">
         <div>serve as {{ order.type }}</div>
         <div>deliver to {{ order.recipient.toLowerCase() }}</div>
       </div>
@@ -102,7 +102,7 @@ export default {
   color: #8a8a8a;
 }
 
-.drink-style {
+.drink-information {
   padding: 10px;
   color: #eee;
   font-size: 1em;
@@ -113,12 +113,10 @@ export default {
 .complete-button {
   width: 120px;
   padding: 5px;
-  margin: 10px 5px;
-  /* TODO: needed? */
+  margin: 5px;
   border: 0;
   border-radius: 4px;
   cursor: pointer;
-  /* TODO: needed? */
   font-size: 1em;
   font-weight: bold;
 }

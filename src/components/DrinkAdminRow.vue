@@ -1,8 +1,8 @@
 <template>
   <div class="drink">
     <div class="drink-name">{{ drink.name }}</div>
-    <div v-if="drink.active" class="drink-toggle active">active</div>
-    <div v-if="!drink.active" class="drink-toggle disabled">disabled</div>
+    <div v-if="drink.active" class="drink-toggle active" @click="toggleActive">active</div>
+    <div v-if="!drink.active" class="drink-toggle disabled" @click="toggleActive">disabled</div>
     <div class="ingredients">
       <table>
         <tr v-for="(ingredient, index) in drink.ingredients" :key="index">
@@ -17,6 +17,11 @@
 export default {
   name: 'DrinkAdminRow',
   props: ['drink'],
+  methods: {
+    toggleActive() {
+      this.$parent.$emit('toggle-drink-active', this.drink.id);
+    }
+  }
 }
 </script>
 
