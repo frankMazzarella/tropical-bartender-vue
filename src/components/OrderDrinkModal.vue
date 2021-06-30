@@ -95,8 +95,8 @@ button {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 350px;
-  padding: 25px 0;
+  width: 300px;
+  padding: 25px;
   transform: translate(-50%, -50%);
   background-color: #22262b;
   color: #eee;

@@ -2,7 +2,7 @@
   <div class="drink-item" @click="orderDrink">
     <div class="drink-icon">
       <inline-svg v-if="drink.type === 'iced'" :src="require('../assets/drink-iced.svg')" fill="#eee" width="50px" />
-      <inline-svg v-if="drink.type === 'slushy'" :src="require('../assets/drink-slushy.svg')" fill="#eee" width="50px" />
+      <inline-svg v-if="drink.type === 'smoothie'" :src="require('../assets/drink-smoothie.svg')" fill="#eee" width="50px" />
     </div>
     <div class="drink-info-container">
       <div class="drink-name">{{ drink.name }}</div>

@@ -2,6 +2,7 @@
 # TODO: update readme
 # TODO: add 'bartender is lazy' warning when drink orders are taking a while
 # TODO: attempt to get full screen/no sleep working on drink list
+# TODO: add mojito to list
 
 ## Project setup
 ```
