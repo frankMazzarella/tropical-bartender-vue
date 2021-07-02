@@ -20,7 +20,7 @@ import SocketIOClient from '../services/SocketIOClient';
 import DrinkOrderRow from '../components/DrinkOrderRow.vue';
 import BartenderHeader from '../components/BartenderHeader.vue';
 
-// TODO: add link to order queue page
+// TODO: add link to order admin page
 
 export default {
   name: 'OrderQueue',
@@ -32,11 +32,14 @@ export default {
   data: () => ({
     socket: null,
     orderQueue: [],
+    isAnyDrinkOrderRowOpen: false,
   }),
   created: function () {
     this.socket = SocketIOClient.connectToOrderQueue();
     this.registerSocketLifecycleEvents();
     this.$on('complete-order', this.emitDeleteDrinkOrder);
+    this.$on('drink-order-row-opened', this.drinkOrderRowOpened)
+    this.$on('drink-order-row-closed', this.drinkOrderRowClosed);
   },
   methods: {
     registerSocketLifecycleEvents() {
@@ -56,6 +59,15 @@ export default {
       this.socket.emit('delete drink order', id, () => {
         console.log(`drink ${id} was deleted`);
       });
+    },
+    drinkOrderRowOpened() {
+      if (this.isAnyDrinkOrderRowOpen) {
+        this.$emit('close-drink-order-row');
+      }
+      this.isAnyDrinkOrderRowOpen = true;
+    },
+    drinkOrderRowClosed() {
+      this.isAnyDrinkOrderRowOpen = false;
     }
   }
 }

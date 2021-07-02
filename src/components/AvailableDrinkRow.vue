@@ -18,7 +18,6 @@
 <script>
 import InlineSvg from 'vue-inline-svg';
 
-// TODO: would be nice if other modals would close when a new one opened
 export default {
   name: 'AvailableDrinkRow',
   components: {

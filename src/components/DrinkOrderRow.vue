@@ -34,6 +34,7 @@ export default {
   }),
   created: function () {
     this.startOrderAgeInterval();
+    this.$parent.$on('close-drink-order-row', this.close);
   },
   methods: {
     startOrderAgeInterval() {
@@ -56,10 +57,20 @@ export default {
       return Math.floor((now.getTime() - this.order.timestamp) / minute);
     },
     toggleActive() {
+      if (this.isActive) {
+        this.$parent.$emit('drink-order-row-closed');
+      } else {
+        this.$parent.$emit('drink-order-row-opened');
+      }
       this.isActive = !this.isActive;
     },
     complete() {
       this.$parent.$emit('complete-order', this.order.id);
+    },
+    close() {
+      if (this.isActive) {
+        this.isActive = false;
+      }
     }
   }
 }
