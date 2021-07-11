@@ -2,7 +2,7 @@
   <div>
     <div class="header">
       <div class="container">
-        <div class="header-left">Tropical Drink Night!</div>
+        <div class="header-left" :class="{ red: bartenderIsSlow }">{{ headerText }}</div>
         <div class="header-right">{{ dateTime }}</div>
       </div>
     </div>
@@ -31,7 +31,9 @@ export default {
   data: () => ({
     socket: null,
     drinkList: [],
-    dateTime: ''
+    dateTime: '',
+    headerText: 'Tropical Drink Night!',
+    bartenderIsSlow: false
   }),
   created: function () {
     this.socket = SocketIOClient.connectToDrinkList();
@@ -51,6 +53,16 @@ export default {
       this.socket.on('drink list', (drinkList) => {
         console.log({ drinkList });
         this.drinkList = drinkList;
+      });
+      this.socket.on('oldest drink order age', (oldestDrinkOrderAge) => {
+        const fiveMinutes = 1000 * 60 * 5;
+        if (oldestDrinkOrderAge >= fiveMinutes) {
+          this.headerText = 'Bartender Is Slow!!!!';
+          this.bartenderIsSlow = true;
+        } else {
+          this.headerText = 'Tropical Drink Night!';
+          this.bartenderIsSlow = false;
+        }
       });
     },
     emitDrinkOrder(drink) {
@@ -129,6 +141,10 @@ export default {
 
 .spacer {
   height: 50px;
+}
+
+.red {
+  color: #e81f1f;
 }
 
 @media (max-width: 700px) {
