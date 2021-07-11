@@ -130,6 +130,7 @@ export default {
   cursor: pointer;
   font-size: 1em;
   font-weight: bold;
+  background-color: #eee;
 }
 
 .active {
