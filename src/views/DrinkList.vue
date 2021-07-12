@@ -17,6 +17,8 @@
 
 // TODO: needs vue-insomnia
 // https://github.com/gorbypark/vue-insomnia
+// TODO: attempt to get full screen/no sleep working on drink list
+// TODO: add mojito to list
 
 <script>
 import SocketIOClient from '../services/SocketIOClient';
