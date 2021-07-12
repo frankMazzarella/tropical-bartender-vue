@@ -8,14 +8,17 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: 'drinklist',
     component: DrinkList
   },
   {
     path: '/list',
+    name: 'orderqueue',
     component: () => import(/* webpackChunkName: "order-queue" */ '../views/OrderQueue.vue')
   },
   {
     path: '/admin',
+    name: 'drinkadmin',
     component: () => import(/* webpackChunkName: "drink-admin" */ '../views/DrinkAdmin.vue')
   },
   {

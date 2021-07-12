@@ -33,12 +33,12 @@ export default {
       this.time = `${hours}:${minutes}`;
     },
     togglePage() {
-      const currentPath = this.$router.currentRoute.path
-      if (currentPath === '/list') {
-        this.$router.push('admin')
+      const currentPath = this.$router.currentRoute.path;
+      if (currentPath.includes('list')) {
+        this.$router.push({ name: 'drinkadmin' })
       }
-      if (currentPath === '/admin') {
-        this.$router.push('list')
+      if (currentPath.includes('admin')) {
+        this.$router.push({ name: 'orderqueue' })
       }
     }
   }

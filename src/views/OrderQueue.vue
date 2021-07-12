@@ -39,6 +39,9 @@ export default {
     this.$on('drink-order-row-opened', this.drinkOrderRowOpened)
     this.$on('drink-order-row-closed', this.drinkOrderRowClosed);
   },
+  destroyed: function () {
+    this.socket.disconnect();
+  },
   methods: {
     registerSocketLifecycleEvents() {
       this.socket.on('connect', () => {

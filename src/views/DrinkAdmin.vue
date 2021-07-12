@@ -29,6 +29,9 @@ export default {
     this.registerSocketLifecycleEvents();
     this.$on('toggle-drink-active', this.emitToggleDrinkActive);
   },
+  destroyed: function () {
+    this.socket.disconnect();
+  },
   methods: {
     registerSocketLifecycleEvents() {
       this.socket.on('connect', () => {
