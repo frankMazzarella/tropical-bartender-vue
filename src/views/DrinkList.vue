@@ -1,6 +1,6 @@
 <template>
   <div class="fullscreen-container" ref="fullscreen-container">
-    <div class="header" @click="toggleFullscreen">
+    <div class="header" @click="headerClicked">
       <div class="container">
         <div class="header-left" v-if="!bartenderIsLazy">Tropical Drink Night!</div>
         <div class="header-left red" v-if="bartenderIsLazy">Bartender is lazy!!!!</div>
@@ -15,15 +15,14 @@
   </div>
 </template>
 
-// TODO: needs vue-insomnia
-// https://github.com/gorbypark/vue-insomnia
-// TODO: attempt to get no sleep working on drink list
-// TODO: add mojito to list
-
 <script>
+import NoSleep from 'nosleep.js';
+
 import SocketIOClient from '../services/SocketIOClient';
 import AvailableDrinkRow from '../components/AvailableDrinkRow';
 import OrderDrinkModal from '../components/OrderDrinkModal';
+
+// TODO: add mojito to list
 
 export default {
   name: 'DrinkList',
@@ -33,6 +32,7 @@ export default {
   },
   data: () => ({
     socket: null,
+    noSleep: null,
     drinkList: [],
     dateTime: '',
     bartenderIsLazy: false
@@ -42,6 +42,7 @@ export default {
     this.registerSocketLifecycleEvents();
     this.$on('order-drink', this.emitDrinkOrder);
     this.startDateTimeUpdateInterval();
+    this.noSleep = new NoSleep();
   },
   methods: {
     registerSocketLifecycleEvents() {
@@ -109,14 +110,16 @@ export default {
       const minutes = now.getMinutes().toString().padStart(2, '0');
       this.dateTime = `${weekDay}, ${month} ${date}, ${hours}:${minutes}`;
     },
-    toggleFullscreen() {
+    headerClicked() {
       const fullscreenContainer = this.$refs['fullscreen-container'];
       if (document.fullscreenElement) {
         if (document.exitFullscreen) {
+          this.noSleep.disable();
           document.exitFullscreen();
         }
       } else {
         if (fullscreenContainer.requestFullscreen) {
+          this.noSleep.enable();
           fullscreenContainer.requestFullscreen();
         }
       }

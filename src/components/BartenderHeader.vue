@@ -10,8 +10,6 @@
   </div>
 </template>
 
-// TODO: i hate the tap the header solution for changing pages
-
 <script>
 export default {
   name: 'BartenderHeader',
