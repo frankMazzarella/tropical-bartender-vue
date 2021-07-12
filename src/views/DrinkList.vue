@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="header">
+  <div class="fullscreen-container" ref="fullscreen-container">
+    <div class="header" @click="toggleFullscreen">
       <div class="container">
         <div class="header-left" v-if="!bartenderIsLazy">Tropical Drink Night!</div>
         <div class="header-left red" v-if="bartenderIsLazy">Bartender is lazy!!!!</div>
@@ -17,7 +17,7 @@
 
 // TODO: needs vue-insomnia
 // https://github.com/gorbypark/vue-insomnia
-// TODO: attempt to get full screen/no sleep working on drink list
+// TODO: attempt to get no sleep working on drink list
 // TODO: add mojito to list
 
 <script>
@@ -108,12 +108,28 @@ export default {
       const hours = now.getHours().toString().padStart(2, '0');
       const minutes = now.getMinutes().toString().padStart(2, '0');
       this.dateTime = `${weekDay}, ${month} ${date}, ${hours}:${minutes}`;
+    },
+    toggleFullscreen() {
+      const fullscreenContainer = this.$refs['fullscreen-container'];
+      if (document.fullscreenElement) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      } else {
+        if (fullscreenContainer.requestFullscreen) {
+          fullscreenContainer.requestFullscreen();
+        }
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+.fullscreen-container {
+  overflow: scroll;
+}
+
 .container {
   max-width: 1200px;
   margin: auto;
@@ -127,6 +143,7 @@ export default {
   border-bottom: 1px solid #e0723b;
   color: #e0723b;
   font-size: 1.5em;
+  cursor: pointer;
 }
 
 .header-left {
