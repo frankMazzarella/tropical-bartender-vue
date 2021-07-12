@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="header">
+    <div class="header" @click="togglePage">
       <div class="container">
         <div class="header-left"><slot /></div>
         <div class="header-right">{{ time }}</div>
@@ -9,6 +9,8 @@
     <div class="spacer" />
   </div>
 </template>
+
+// TODO: i hate the tap the header solution for changing pages
 
 <script>
 export default {
@@ -29,6 +31,15 @@ export default {
       const hours = now.getHours().toString().padStart(2, '0');
       const minutes = now.getMinutes().toString().padStart(2, '0');
       this.time = `${hours}:${minutes}`;
+    },
+    togglePage() {
+      const currentPath = this.$router.currentRoute.path
+      if (currentPath === '/list') {
+        this.$router.push('admin')
+      }
+      if (currentPath === '/admin') {
+        this.$router.push('list')
+      }
     }
   }
 }
@@ -41,6 +52,7 @@ export default {
 }
 
 .header {
+  cursor: pointer;
   background-color: #191b1f;
   width: 100%;
   position: fixed;

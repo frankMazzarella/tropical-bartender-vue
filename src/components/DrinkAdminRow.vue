@@ -38,14 +38,14 @@ export default {
   text-align: left;
   flex: 2 1 auto;
   color: #67a5fb;
-  padding: 5px;
+  padding: 10px;
   font-size: 1.1em;
 }
 
 .drink-toggle {
   width: 120px;
   padding: 5px;
-  margin: 10px 5px;
+  margin: 10px;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;

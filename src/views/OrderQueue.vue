@@ -20,8 +20,6 @@ import SocketIOClient from '../services/SocketIOClient';
 import DrinkOrderRow from '../components/DrinkOrderRow.vue';
 import BartenderHeader from '../components/BartenderHeader.vue';
 
-// TODO: add link to order admin page
-
 export default {
   name: 'OrderQueue',
   components: {
