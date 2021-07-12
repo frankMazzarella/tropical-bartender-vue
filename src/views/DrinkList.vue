@@ -2,7 +2,7 @@
   <div>
     <div class="header">
       <div class="container">
-        <div class="header-left" :class="{ red: bartenderIsSlow }">{{ headerText }}</div>
+        <div class="header-left" :class="{ red: bartenderIsLazy }">{{ headerText }}</div>
         <div class="header-right">{{ dateTime }}</div>
       </div>
     </div>
@@ -33,7 +33,7 @@ export default {
     drinkList: [],
     dateTime: '',
     headerText: 'Tropical Drink Night!',
-    bartenderIsSlow: false
+    bartenderIsLazy: false
   }),
   created: function () {
     this.socket = SocketIOClient.connectToDrinkList();
@@ -57,11 +57,11 @@ export default {
       this.socket.on('oldest drink order age', (oldestDrinkOrderAge) => {
         const fiveMinutes = 1000 * 60 * 5;
         if (oldestDrinkOrderAge >= fiveMinutes) {
-          this.headerText = 'Bartender Is Slow!!!!';
-          this.bartenderIsSlow = true;
+          this.headerText = 'Bartender is lazy!!!!';
+          this.bartenderIsLazy = true;
         } else {
           this.headerText = 'Tropical Drink Night!';
-          this.bartenderIsSlow = false;
+          this.bartenderIsLazy = false;
         }
       });
     },
