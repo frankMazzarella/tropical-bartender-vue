@@ -3,7 +3,7 @@
     <div class="modal">
       <div class="title">Order a <strong>{{ drink.name }}</strong></div>
       <label for="name">Your name</label>
-      <input type="text" ref="name" id="name" v-model="recipient" />
+      <input type="text" ref="name" id="name" v-model="recipient" @keyup.enter="submit" />
       <button class="cancel" @click="hide">Nevermind</button>
       <button class="submit" @click="submit">Order</button>
     </div>
@@ -12,8 +12,6 @@
 </template>
 
 <script>
-// TODO: would be nice if enter key would trigger submit button
-
 export default {
   name: 'OrderDrinkModal',
   data: () => ({
@@ -34,6 +32,9 @@ export default {
     show(drink) {
       this.drink = drink;
       this.active = true;
+      this.$nextTick(() => {
+        this.$refs.name.focus();
+      })
     },
     submit() {
       if (!this.recipient) {

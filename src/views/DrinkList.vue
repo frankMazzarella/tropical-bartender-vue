@@ -130,7 +130,8 @@ export default {
 
 <style scoped>
 .fullscreen-container {
-  overflow: scroll;
+  overflow: auto;
+  background-color: #22262b;
 }
 
 .container {
