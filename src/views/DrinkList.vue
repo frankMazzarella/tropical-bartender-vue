@@ -22,8 +22,6 @@ import SocketIOClient from '../services/SocketIOClient';
 import AvailableDrinkRow from '../components/AvailableDrinkRow';
 import OrderDrinkModal from '../components/OrderDrinkModal';
 
-// TODO: add mojito to list
-
 export default {
   name: 'DrinkList',
   components: {
