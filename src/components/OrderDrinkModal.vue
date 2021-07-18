@@ -12,6 +12,9 @@
 </template>
 
 <script>
+
+// TODO: needs confirmation and also error handling would be good
+
 export default {
   name: 'OrderDrinkModal',
   data: () => ({
