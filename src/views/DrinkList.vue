@@ -56,9 +56,8 @@ export default {
         this.drinkList = drinkList;
       });
       this.socket.on('oldest drink order age', (oldestDrinkOrderAge) => {
-        // TODO: change to 10 mns
-        const fiveMinutes = 1000 * 60 * 5;
-        if (oldestDrinkOrderAge >= fiveMinutes) {
+        const tenMinutes = 1000 * 60 * 10;
+        if (oldestDrinkOrderAge >= tenMinutes) {
           this.bartenderIsLazy = true;
         } else {
           this.bartenderIsLazy = false;
